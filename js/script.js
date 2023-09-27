@@ -97,4 +97,5 @@ function init() {
     highlightActiveLink();
 }
 
+//Event Listeners
 document.addEventListener('DOMContentLoaded', init);
