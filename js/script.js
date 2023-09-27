@@ -25,11 +25,6 @@ async function displayPopularMovies() {
 
 //Display 20 most popular tv shows
 async function displayPopularShows() {
-    const isReal = true;
-    console.log('function is running');
-    if (isReal) {
-        return;
-    }
     const {results} = await fetchAPIData('tv/popular');
     results.forEach((show) => {
         const div = document.createElement('div');
@@ -48,9 +43,6 @@ async function displayPopularShows() {
         document.querySelector('#popular-shows').appendChild(div);
     });
 }
-
-displayPopularShows();
-
 
 //Fetch data from TMDB API
 async function fetchAPIData(endpoint) {
@@ -90,7 +82,7 @@ function init() {
             console.log(global.currentPage);
             displayPopularMovies();
             break;
-        case '/shows.html':
+        case '/shows':
         case '/12-flixx-app-project/shows.html':
             displayPopularShows();
             break;
