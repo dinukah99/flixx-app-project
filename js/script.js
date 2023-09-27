@@ -25,6 +25,11 @@ async function displayPopularMovies() {
 
 //Display 20 most popular tv shows
 async function displayPopularShows() {
+    const isReal = true;
+    console.log('function is running');
+    if (isReal) {
+        return;
+    }
     const {results} = await fetchAPIData('tv/popular');
     results.forEach((show) => {
         const div = document.createElement('div');
@@ -77,8 +82,9 @@ function highlightActiveLink() {
 // Init app
 function init() {
     switch (global.currentPage) {
-        case '/index.html':
+        case '/':
         case '/12-flixx-app-project/index.html':
+            console.log(global.currentPage);
             displayPopularMovies();
             break;
         case '/shows.html':
