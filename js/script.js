@@ -77,10 +77,11 @@ function highlightActiveLink() {
 // Init app
 function init() {
     switch (global.currentPage) {
-        case '/':
+        case '/index.html':
         case '/12-flixx-app-project/index.html':
             displayPopularMovies();
             break;
+        case '/shows.html':
         case '/12-flixx-app-project/shows.html':
             displayPopularShows();
             break;
