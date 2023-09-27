@@ -49,6 +49,9 @@ async function displayPopularShows() {
     });
 }
 
+displayPopularShows();
+
+
 //Fetch data from TMDB API
 async function fetchAPIData(endpoint) {
     const API_KEY = 'd6fabae4fc33b36f028ac6d196b5dbab';
