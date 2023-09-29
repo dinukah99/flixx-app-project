@@ -133,13 +133,15 @@ function init() {
         case '/12-flixx-app-project/shows.html':
             displayPopularShows();
             break;
+        case '/movie-details':
         case '/12-flixx-app-project/movie-details.html':
-            console.log(global.currentPage);
             displayMovieDetails();
             break;
+        case '/tv-details':
         case '/12-flixx-app-project/tv-details.html':
             console.log('TV Details');
             break;
+        case '/search':
         case '/12-flixx-app-project/search.html':
             console.log('Search');
             break;
