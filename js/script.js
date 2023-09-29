@@ -2,6 +2,8 @@ const global = {
     currentPage: window.location.pathname,
 };
 
+console.log(global.currentPage);
+
 //Display 20 most popular movies
 async function displayPopularMovies() {
     const {results} = await fetchAPIData('movie/popular');
@@ -139,11 +141,9 @@ function init() {
             break;
         case '/tv-details':
         case '/12-flixx-app-project/tv-details.html':
-            console.log('TV Details');
             break;
         case '/search':
         case '/12-flixx-app-project/search.html':
-            console.log('Search');
             break;
     }
     highlightActiveLink();
