@@ -127,7 +127,6 @@ function init() {
     switch (global.currentPage) {
         case '/':
         case '/12-flixx-app-project/index.html':
-            console.log(global.currentPage);
             displayPopularMovies();
             break;
         case '/shows':
@@ -135,6 +134,7 @@ function init() {
             displayPopularShows();
             break;
         case '/12-flixx-app-project/movie-details.html':
+            console.log(global.currentPage);
             displayMovieDetails();
             break;
         case '/12-flixx-app-project/tv-details.html':
