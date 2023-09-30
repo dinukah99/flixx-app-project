@@ -1,5 +1,15 @@
 const global = {
     currentPage: window.location.pathname,
+    search: {
+        term: '',
+        type: '',
+        page: 1,
+        totalPages: 1,
+    },
+    api: {
+        apiKey: 'd6fabae4fc33b36f028ac6d196b5dbab',
+        apiUrl: 'https://api.themoviedb.org/3/',
+    }
 };
 
 console.log(global.currentPage);
@@ -164,6 +174,21 @@ function displayBackgroundImage(type, backgroundPath) {
     }
 }
 
+//Search Movies/Shows
+async function search() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    global.search.type = urlParams.get('type');
+    global.search.term = urlParams.get('search-term');
+
+    if (global.search.term !== '' && global.search.term !== null) {
+        const results = await searchAPIData();
+        console.log(results);
+    } else {
+        showAlert('Please enter a search term');
+    }
+}
+
 //Display slider movies
 async function displaySlider() {
     const {results} = await fetchAPIData('movie/now_playing');
@@ -210,11 +235,23 @@ function initSwiper() {
 
 //Fetch data from TMDB API
 async function fetchAPIData(endpoint) {
-    const API_KEY = 'd6fabae4fc33b36f028ac6d196b5dbab';
-    const API_URL = 'https://api.themoviedb.org/3/';
+    const API_KEY = global.api.apiKey;
+    const API_URL = global.api.apiUrl;
 
     showSpinner();
     const response = await fetch(`${API_URL}${endpoint}?api_key=${API_KEY}&language-en-US`);
+    const data = await response.json();
+    hideSpinner();
+    return data;
+}
+
+//Make request to search
+async function searchAPIData() {
+    const API_KEY = global.api.apiKey;
+    const API_URL = global.api.apiUrl;
+
+    showSpinner();
+    const response = await fetch(`${API_URL}search/${global.search.type}?api_key=${API_KEY}&language-en-US&query=${global.search.term}`);
     const data = await response.json();
     hideSpinner();
     return data;
@@ -236,6 +273,18 @@ function highlightActiveLink() {
             link.classList.add('active');
         }
     });
+}
+
+//Show alert
+function showAlert(message, className) {
+    const alertEl = document.createElement('div');
+    alertEl.classList.add('alert', className);
+    alertEl.appendChild(document.createTextNode(message));
+    document.querySelector('#alert').appendChild(alertEl);
+
+    setTimeout(() => {
+        alertEl.remove();
+    }, 3000);
 }
 
 function addCommasToNumber(number) {
@@ -269,6 +318,7 @@ function init() {
         case '/search':
         case '/search.html':
         case '/12-flixx-app-project/search.html':
+            search();
             break;
     }
     highlightActiveLink();
